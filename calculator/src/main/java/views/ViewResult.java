@@ -1,5 +1,6 @@
 package main.java.views;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import main.java.world.World;
@@ -17,6 +18,8 @@ public class ViewResult extends HBox implements Observer {
 
         this.setPrefHeight(50);
         this.setPrefWidth(150);
+        this.setStyle("-fx-border-color: black");
+        this.setPadding(new Insets(10, 10, 10, 10));
 
         this.getChildren().add(result);
     }
