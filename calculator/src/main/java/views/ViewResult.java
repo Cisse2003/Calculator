@@ -1,0 +1,46 @@
+package main.java.views;
+
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import main.java.world.World;
+
+
+public class ViewResult extends HBox implements Observer {
+    private World world;
+    private Label result;
+
+    public ViewResult(World world){
+        super();
+        this.world = world;
+        this.result = new Label();
+        this.result.setText("0");
+
+        this.setPrefHeight(50);
+        this.setPrefWidth(150);
+
+        this.getChildren().add(result);
+    }
+
+    @Override
+    public void react() {
+
+    }
+
+    // Getters
+    public World getWorld() {
+        return world;
+    }
+
+    public Label getResult() {
+        return result;
+    }
+
+    // Setters
+    public void setWorld(World world) {
+        this.world = world;
+    }
+
+    public void setResult(Label result) {
+        this.result = result;
+    }
+}
