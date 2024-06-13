@@ -17,8 +17,13 @@ public class ViewTools extends GridPane implements Observer {
         super();
         this.world = world;
         this.buttons = new ArrayList<>();
+        this.world.addObserver(this);
         initializeButtons();
         configureGridPane();
+
+        for(Button button : buttons){
+            button.setOnAction(new ListenButton(world, this));
+        }
     }
 
     private void initializeButtons(){
@@ -32,7 +37,7 @@ public class ViewTools extends GridPane implements Observer {
         Button btn8 = createButton("8");
         Button btn9 = createButton("9");
         Button btnDivide = createButton("÷");
-        Button btnSqrt = createButton("√");
+        Button btnSqrt = createButton("√(");
         Button btn4 = createButton("4");
         Button btn5 = createButton("5");
         Button btn6 = createButton("6");
@@ -43,7 +48,9 @@ public class ViewTools extends GridPane implements Observer {
         Button btn3 = createButton("3");
         Button btnSubtract = createButton("-");
         Button btnEqual = createButton("=");
+        btnEqual.setPrefHeight(145);
         Button btn0 = createButton("0");
+        btn0.setPrefWidth(135);
         Button btnComma = createButton(",");
         Button btnPercent = createButton("%");
         Button btnAdd = createButton("+");
@@ -72,10 +79,8 @@ public class ViewTools extends GridPane implements Observer {
         this.add(btn3, 2, 3);
         this.add(btnSubtract, 3, 3);
         this.add(btnEqual, 4, 3, 1, 2); // Span equal button across 2 rows
-
         this.add(btn0, 0, 4, 2, 1); // Span 0 button across 2 columns
-        this.add(btnComma, 1, 4);
-        this.add(btnPercent, 2, 4);
+        this.add(btnComma, 2, 4);
         this.add(btnAdd, 3, 4);
 
         // Add buttons to the list for potential future use
@@ -103,6 +108,20 @@ public class ViewTools extends GridPane implements Observer {
         buttons.add(btnComma);
         buttons.add(btnPercent);
         buttons.add(btnAdd);
+
+        for(Button button : buttons){
+            button.setStyle("-fx-border-radius: 2px; -fx-border-color: #000");
+            button.setStyle("-fx-font-weight: bold");
+
+        }
+
+        btnSubtract.setStyle(("-fx-background-color: rgba(255,165,0,0.8);"));
+        btnAdd.setStyle("-fx-background-color: rgba(255,165,0,0.8);");
+        btnMultiply.setStyle("-fx-background-color: rgba(255,165,0,0.8);");
+        btnDivide.setStyle("-fx-background-color: rgba(255,165,0,0.8);");
+        btnEqual.setStyle("-fx-background-color: rgba(0,128,0,0.8);");
+        btnClear.setStyle("-fx-background-color: rgba(255,0,0,0.8);");
+
     }
 
     private Button createButton(String text) {
@@ -132,12 +151,15 @@ public class ViewTools extends GridPane implements Observer {
     }
 
     // Getters
-    private World getWorld(){
+    public World getWorld(){
         return world;
+    }
+    private ArrayList<Button> getButtons(){
+        return buttons;
     }
 
     // Setters
-    private void setWorld(World world){
+    public void setWorld(World world){
         this.world = world;
     }
 }

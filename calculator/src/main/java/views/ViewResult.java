@@ -15,6 +15,7 @@ public class ViewResult extends HBox implements Observer {
         this.world = world;
         this.result = new Label();
         this.result.setText("0");
+        this.world.addObserver(this);
 
         this.setPrefHeight(50);
         this.setPrefWidth(150);
@@ -26,7 +27,11 @@ public class ViewResult extends HBox implements Observer {
 
     @Override
     public void react() {
-
+        if(!world.getToCalculate().equals("")){
+            result.setText(world.getToCalculate());
+        }else{
+            result.setText("0");
+        }
     }
 
     // Getters
